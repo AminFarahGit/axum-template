@@ -5,6 +5,27 @@ use axum::{
 
 use std::collections::HashMap;
 
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Clone)]
+struct Task{
+    id: u32,
+    title: String,
+    done: bool,
+}
+
+#[derive(Deserialize)]
+struct CreateTask {
+    title: String,
+}
+
+
+fn seed_tasks() -> Vec<Task> {
+    vec![
+        Task { id: 1, title: "Lean Axum".to_string(), done: false}
+    ]
+}
+
 #[tokio::main]
 async fn main(){
     let app = Router::new()
